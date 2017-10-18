@@ -29,7 +29,7 @@ grant all privileges on *.* to 'homestead'@'%';
 
 Copy .env.example to .env and change the database variable in .env:
 ````ruby
-DB_DATABASE=laravel_vue2_crud
+DB_DATABASE=ladbrokes
 DB_PASSWORD=<yoursecret>
 ````
 
