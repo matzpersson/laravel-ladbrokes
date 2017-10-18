@@ -1,53 +1,68 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
-
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
+## Ladbrokes Race Test
+This is a un-authenticated, responsive SPA Race application with Laravel Rest Api on the back. Rest API can be consumed from this application or directly onto the API. The front-end framework is reactive Vue2. Styling is with Bootstrap 3
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+To demonstrate a race row disappearing after closing time, the closing time is re-seeded everytime you launch the race from this page with just a few minutes apart. For that reason, running with multiple browsers would cause strange behaviour.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Tested in Chrome and Firefox only. <a href="http://ladbrokes.headstation.com">Live demo here</a>
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+## Installation
+Clone or Download this repo. These instructions assume that you have installed Composer, Laravel 5.5, PHP7, Node Package Manager and MySQL.
 
-## Learning Laravel
+Once downloaded, cd into repo directory and start installation:
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+````ruby
+composer install 
+````
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+Create a new mysql database:
+````ruby
+mysql -u root -p
+create database ladbrokes;
+CREATE USER 'homestead'@'%' IDENTIFIED BY '<yoursecret';
+grant all privileges on *.* to 'homestead'@'%';
+````
 
-## Laravel Sponsors
+Copy .env.example to .env and change the database variable in .env:
+````ruby
+DB_DATABASE=laravel_vue2_crud
+DB_PASSWORD=<yoursecret>
+````
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
+Generate the Artisan key:
+````ruby
+php artisan key:generate
+````
 
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
+Migrate the tables and seed the database. Adds about 100 members with random data:
+````ruby
+php artisan migrate:refresh --seed
+````
 
-## Contributing
+Install Vue2 components listed in package.json:
+````ruby
+npm install
+````
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Run NPM dev to compile js:
+````ruby
+npm run dev
+````
 
-## Security Vulnerabilities
+and serve the application with artisan:
+````ruby
+php artisan serve
+````
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+You should now be able to browse this app on http://localhost:8000. 
 
-## License
+## Rest API
+Api can be consumed directly. Following is an example of a call to retrieve all races returning a JSON set.
+````ruby
+http://localhost:8000/api/races
+````
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
