@@ -23,7 +23,7 @@ Create a new mysql database:
 ````ruby
 mysql -u root -p
 create database ladbrokes;
-CREATE USER 'homestead'@'%' IDENTIFIED BY '<yoursecret';
+CREATE USER 'homestead'@'%' IDENTIFIED BY '<yoursecret>';
 grant all privileges on *.* to 'homestead'@'%';
 ````
 
